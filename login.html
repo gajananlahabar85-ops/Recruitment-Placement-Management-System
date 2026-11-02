@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Recruitment & Placement Management System</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="login-page">
+
+<section class="login-art">
+<div class="brand" style="color:#fff">
+<span class="logo" style="background:#fff;color:#1d4ed8">RP</span>
+Recruitment & Placement
+</div>
+<h1>Build careers.<br>Connect opportunities.</h1>
+<p>A central workspace to manage candidates, employers, job openings, interviews, offers and placements.</p>
+<div class="login-feature"><span>✓</span> Candidate and job eligibility tracking</div>
+<div class="login-feature"><span>✓</span> Interview-to-placement workflow</div>
+<div class="login-feature"><span>✓</span> Recruitment insights and reports</div>
+</section>
+
+<section class="login-card-wrap">
+<form class="login-card" id="loginForm" action="/login" method="POST">
+
+<h2>Welcome back</h2>
+<p>Sign in to your placement workspace.</p>
+
+<div class="field">
+<label>Username / Email *</label>
+<input type="email" name="email" placeholder="recruiter@demo.com" required value="recruiter@demo.com">
+</div>
+
+<div class="field">
+<label>Password *</label>
+<input type="password" name="password" placeholder="Enter password" required value="demo123">
+</div>
+
+<div class="field">
+<label>Role *</label>
+<select name="role" required>
+<option value="Recruiter">Recruiter</option>
+<option value="Admin">Admin</option>
+<option value="Placement Officer">Placement Officer</option>
+</select>
+</div>
+
+<p class="muted" style="font-size:12px">Demo login credentials are provided for testing.</p>
+
+<button class="btn" type="submit">Login →</button>
+<button class="btn secondary" type="reset">Reset</button>
+
+<div class="footer-note">🔒 Authorized users only · Python Flask System</div>
+
+</form>
+</section>
+</div>
+</body>
+</html>
+
