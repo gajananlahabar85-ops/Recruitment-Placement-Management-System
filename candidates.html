@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candidates | Recruitment & Placement Management System</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="dashboard.html">
+    <span class="logo">RP</span>
+    <span>Recruitment & Placement<br><small class="muted">Management System</small></span>
+  </a>
+  <div class="user">
+    <span>Welcome, <strong>Admin</strong></span>
+    <span class="avatar">AD</span>
+    <a class="btn secondary small" href="login.html">Logout</a>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+  <div class="side-label">Workspace</div>
+  <a class="nav" href="dashboard.html">▦ Dashboard</a>
+  <a class="nav active" href="candidates.html">♙ Candidates</a>
+  <a class="nav" href="companies.html">▣ Companies</a>
+  <a class="nav" href="jobs.html">▤ Jobs</a>
+  <a class="nav" href="applications.html">▧ Applications</a>
+  <a class="nav" href="interviews.html">◷ Interviews</a>
+  <a class="nav" href="placement-process.html">✓ Placement Process</a>
+  <a class="nav" href="reports.html">▥ Reports</a>
+  <div class="side-label" style="margin-top:18px">Account</div>
+  <a class="nav" href="login.html">↪ Logout</a>
+</aside>
+
+<main class="main">
+  <div class="pagehead">
+    <div>
+      <div class="eyebrow">Workspace / Candidates</div>
+      <h1>Candidates</h1>
+      <p class="subtitle">Search, filter and browse candidate profiles.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="candidate-form.html">＋ Add Candidate</a>
+    </div>
+  </div>
+
+  <section class="panel">
+    <div class="panelhead">
+      <h2>Candidate Directory · <span id="recordCount">Loading...</span></h2>
+      <a class="btn" href="candidate-form.html">＋ Add Candidate</a>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Candidate ID</th>
+            <th>Candidate</th>
+            <th>Email</th>
+            <th>Technology</th>
+            <th>Qualification</th>
+            <th>Passing Year</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="candidateTable">
+          <tr><td colspan="8">Loading candidates...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="muted" style="font-size:11px;text-align:center;padding:18px 0 6px">
+    Recruitment & Placement Management System
+  </footer>
+</main>
+</div>
+
+<script>
+async function loadCandidates() {
+  const tbody = document.getElementById('candidateTable');
+  const count = document.getElementById('recordCount');
+
+  try {
+    const response = await fetch('/api/candidates');
+
+    if (!response.ok) {
+      throw new Error('API request failed');
+    }
+
+    const candidates = await response.json();
+
+    count.textContent = candidates.length + ' records';
+    tbody.innerHTML = '';
+
+    if (candidates.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8">No candidates found</td></tr>';
+      return;
+    }
+
+    candidates.forEach(candidate => {
+      const row = document.createElement('tr');
+
+      const values = [
+        candidate.id,
+        candidate.full_name,
+        candidate.email,
+        candidate.technology,
+        candidate.qualification,
+        candidate.passing_year,
+        candidate.status
+      ];
+
+      values.forEach(value => {
+        const cell = document.createElement('td');
+        cell.textContent = value ?? '';
+        row.appendChild(cell);
+      });
+
+      const actionCell = document.createElement('td');
+      const deleteButton = document.createElement('button');
+
+      deleteButton.textContent = 'Delete';
+      deleteButton.className = 'btn secondary small';
+
+      deleteButton.addEventListener('click', async () => {
+        if (!confirm('Are you sure you want to delete this candidate?')) return;
+
+        try {
+          const result = await fetch('/api/candidates/' + candidate.id, {
+            method: 'DELETE'
+          });
+
+          if (!result.ok) throw new Error('Delete failed');
+
+          loadCandidates();
+        } catch (error) {
+          alert('Unable to delete candidate.');
+        }
+      });
+
+      actionCell.appendChild(deleteButton);
+      row.appendChild(actionCell);
+      tbody.appendChild(row);
+    });
+
+  } catch (error) {
+    count.textContent = 'Error';
+    tbody.innerHTML = '<tr><td colspan="8">Unable to load candidates. Check Flask server.</td></tr>';
+    console.error(error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadCandidates);
+</script>
+
+</body>
+</html>
