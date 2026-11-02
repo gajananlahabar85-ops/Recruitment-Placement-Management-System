@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Candidate | Recruitment & Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="dashboard.html">
+      <span class="logo">RP</span>
+      <span>Recruitment & Placement<br><small class="muted">Management System</small></span>
+    </a>
+    <div class="user">
+      <span>Welcome, <strong>Admin</strong></span>
+      <span class="avatar">AD</span>
+      <a class="btn secondary small" href="login.html">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-label">Workspace</div>
+      <a class="nav" href="dashboard.html"><span class="ico">▦</span>Dashboard</a>
+      <a class="nav active" href="candidates.html"><span class="ico">♙</span>Candidates</a>
+      <a class="nav" href="companies.html"><span class="ico">▣</span>Companies</a>
+      <a class="nav" href="jobs.html"><span class="ico">▤</span>Jobs</a>
+      <a class="nav" href="applications.html"><span class="ico">▧</span>Applications</a>
+      <a class="nav" href="interviews.html"><span class="ico">◷</span>Interviews</a>
+      <a class="nav" href="placement-process.html"><span class="ico">✓</span>Placement Process</a>
+      <a class="nav" href="reports.html"><span class="ico">▥</span>Reports</a>
+      <div class="side-label" style="margin-top:18px">Account</div>
+      <a class="nav" href="login.html"><span class="ico">↪</span>Logout</a>
+    </aside>
+
+    <main class="main">
+      <div class="pagehead">
+        <div>
+          <div class="eyebrow">Workspace / Add Candidate</div>
+          <h1>Add Candidate</h1>
+          <p class="subtitle">Capture personal, academic, skill and placement profile information.</p>
+        </div>
+      </div>
+
+      <div class="notice">Fields marked * are required.</div>
+
+      <form class="panel demo-form" action="/save-candidate" method="POST">
+        <h2>Candidate Profile</h2>
+
+        <div class="section-title">Personal Information</div>
+        <div class="formgrid">
+          <div class="field">
+            <label>Full Name *</label>
+            <input type="text" name="full_name" placeholder="Enter full name" required>
+          </div>
+          <div class="field">
+            <label>Email *</label>
+            <input type="email" name="email" placeholder="name@example.com" required>
+          </div>
+          <div class="field">
+            <label>Mobile *</label>
+            <input type="tel" name="mobile" placeholder="10-digit mobile number" required>
+          </div>
+          <div class="field">
+            <label>Date of Birth</label>
+            <input type="date" name="dob">
+          </div>
+          <div class="field">
+            <label>Gender</label>
+            <select name="gender">
+              <option value="">Select gender</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Current Location</label>
+            <input type="text" name="location" placeholder="e.g. Nagpur">
+          </div>
+        </div>
+
+        <div class="section-title">Academic Information</div>
+        <div class="formgrid">
+          <div class="field">
+            <label>Qualification *</label>
+            <select name="qualification" required>
+              <option value="">Select qualification</option>
+              <option value="BE">BE</option>
+              <option value="BTech">BTech</option>
+              <option value="MCA">MCA</option>
+              <option value="BSc">BSc</option>
+              <option value="MSc">MSc</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>College *</label>
+            <input type="text" name="college" placeholder="College name" required>
+          </div>
+          <div class="field">
+            <label>University</label>
+            <input type="text" name="university" placeholder="University name">
+          </div>
+          <div class="field">
+            <label>Passing Year *</label>
+            <input type="number" name="passing_year" placeholder="2027" required>
+          </div>
+          <div class="field">
+            <label>Percentage / CGPA *</label>
+            <input type="number" name="percentage" step="0.01" placeholder="e.g. 78.5" required>
+          </div>
+          <div class="field">
+            <label>Backlog Count *</label>
+            <input type="number" name="backlogs" min="0" placeholder="0" required>
+          </div>
+        </div>
+
+        <div class="section-title">Skills</div>
+        <div class="formgrid">
+          <div class="field">
+            <label>Primary Technology *</label>
+            <select name="technology" required>
+              <option value="">Select primary technology</option>
+              <option value="Java">Java</option>
+              <option value="Python">Python</option>
+              <option value="Testing">Testing</option>
+              <option value="Data Analytics">Data Analytics</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Secondary Skills</label>
+            <input type="text" name="secondary_skills" placeholder="e.g. SQL, HTML, CSS">
+          </div>
+          <div class="field">
+            <label>Skill Level</label>
+            <select name="skill_level">
+              <option value="">Select skill level</option>
+              <option value="Basic">Basic</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-title">Placement Preferences</div>
+        <div class="formgrid">
+          <div class="field">
+            <label>Preferred Location</label>
+            <input type="text" name="preferred_location" placeholder="e.g. Pune">
+          </div>
+          <div class="field">
+            <label>Profile Status *</label>
+            <select name="status" required>
+              <option value="">Select profile status</option>
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="INACTIVE">INACTIVE</option>
+              <option value="ON_HOLD">ON_HOLD</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions" style="margin-top:22px">
+          <button class="btn" type="submit">Save Candidate</button>
+          <button class="btn secondary" type="reset">Reset</button>
+          <a class="btn secondary" href="candidates.html">Cancel</a>
+        </div>
+      </form>
+
+      <footer class="muted" style="font-size:11px;text-align:center;padding:18px 0 6px">
+        Recruitment & Placement Management System
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
